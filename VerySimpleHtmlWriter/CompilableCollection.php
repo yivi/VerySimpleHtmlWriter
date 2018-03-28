@@ -13,6 +13,11 @@ class CompilableCollection implements Compilable, \IteratorAggregate
      */
     private $compilables;
 
+    /**
+     * CompilableCollection constructor.
+     *
+     * @param Compilable[] ...$compilables
+     */
     public function __construct( Compilable ... $compilables )
     {
 
@@ -20,6 +25,9 @@ class CompilableCollection implements Compilable, \IteratorAggregate
     }
 
 
+    /**
+     * @return string
+     */
     public function compile(): string
     {
         $output = '';

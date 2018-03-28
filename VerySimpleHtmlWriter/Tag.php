@@ -34,6 +34,11 @@ class Tag implements Compilable
         $this->attributes = $attributes;
     }
 
+    /**
+     * @param Compilable $content
+     *
+     * @return Tag
+     */
     public function content( Compilable $content ): Tag
     {
         $this->content = $content;
@@ -41,11 +46,20 @@ class Tag implements Compilable
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function hasContent()
     {
         return ! is_null( $this->content );
     }
 
+    /**
+     * @param string $attr
+     * @param string $value
+     *
+     * @return Tag
+     */
     public function attribute( string $attr, string $value ): Tag
     {
         $this->attributes[$attr] = $value;
@@ -53,6 +67,11 @@ class Tag implements Compilable
         return $this;
     }
 
+    /**
+     * @param string $attr
+     *
+     * @return Tag
+     */
     public function removeAttribute( string $attr ): Tag
     {
         if ( isset( $this->attributes[$attr] ) ) {
@@ -62,6 +81,9 @@ class Tag implements Compilable
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function compile(): string
     {
         $html       = "<" . $this->tag;
@@ -83,6 +105,9 @@ class Tag implements Compilable
     }
 
 
+    /**
+     * @return string
+     */
     private function compileAttributes(): string
     {
         $attributes = [];
