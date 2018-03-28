@@ -64,13 +64,17 @@ class Tag implements Compilable
 
     public function compile(): string
     {
-        $html = "<" . $this->tag . " " . $this->compileAttributes();
+        $html       = "<" . $this->tag;
+        $attributes = $this->compileAttributes();
+
+        if ( ! empty( $attributes ) ) {
+            $html .= " $attributes ";
+        }
 
         if ( ! $this->hasContent() ) {
-            $html .= ' />';
+            $html .= '/>';
         } elseif ( $this->content instanceof Compilable ) {
             $html .= $this->content->compile();
-
             $html .= "</" . $this->tag . '>';
         }
 
