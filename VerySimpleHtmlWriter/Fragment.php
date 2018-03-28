@@ -1,6 +1,6 @@
 <?php
 
-namespace VerySimpleHtmlWriter;
+namespace Yivoff\VerySimpleHtmlWriter;
 
 
 class Fragment implements Compilable

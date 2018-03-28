@@ -1,6 +1,6 @@
 <?php
 
-namespace VerySimpleHtmlWriter;
+namespace Yivoff\VerySimpleHtmlWriter;
 
 
 interface Compilable
