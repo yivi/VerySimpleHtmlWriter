@@ -27,4 +27,9 @@ class HtmlWriterService
         return new Fragment( $tag );
     }
 
+    public function collection( array $compilables )
+    {
+        return new CompilableCollection( ... $compilables );
+    }
+
 }
