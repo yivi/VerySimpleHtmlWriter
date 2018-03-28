@@ -1,0 +1,16 @@
+<?php
+
+
+$generator = new HtmlWriter();
+
+$tag = $generator->tag( 'a' )
+                 ->content( $generator->fragment( 'hola manola' ) )
+                 ->attribute( 'href', 'http://www.google.com' )
+                 ->attribute( 'title', 'hola' );
+
+$tag->attribute( 'href', 'https://www.google.com/' )->removeAttribute( 'title' );
+
+
+$div = $generator->tag( 'div' )->content( $tag );
+
+echo $tag->compile();
