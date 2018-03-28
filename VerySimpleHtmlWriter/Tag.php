@@ -90,12 +90,13 @@ class Tag implements Compilable
         $attributes = $this->compileAttributes();
 
         if ( ! empty( $attributes ) ) {
-            $html .= " $attributes ";
+            $html .= " $attributes";
         }
 
         if ( ! $this->hasContent() ) {
-            $html .= '/>';
+            $html .= ' />';
         } elseif ( $this->content instanceof Compilable ) {
+            $html .= '>';
             $html .= $this->content->compile();
             $html .= "</" . $this->tag . '>';
         }
@@ -110,6 +111,10 @@ class Tag implements Compilable
      */
     private function compileAttributes(): string
     {
+        if ( empty( $this->attributes ) ) {
+            return "";
+        }
+
         $attributes = [];
         foreach ( $this->attributes as $attribute => $value ) {
             $attributes[] = "$attribute='$value'";
