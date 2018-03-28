@@ -1,8 +1,8 @@
 {
   "name": "yivi/very-simple-html-writer",
   "description": "This is a very simple HTML writer",
-  "minimum-stability": "unstable",
-  "license": "GPL V3",
+  "minimum-stability": "dev",
+  "license": "GPL-3.0-or-later",
   "version" : "0.0.5",
   "authors": [
     {
