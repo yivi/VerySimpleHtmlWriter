@@ -1,0 +1,12 @@
+{
+  "name": "yivi/VerySimpleHtmlWriter",
+  "description": "This is a very simple HTML writer",
+  "minimum-stability": "unstable",
+  "license": "GPL V3",
+  "authors": [
+    {
+      "name": "yivi",
+      "email": "ivan@yivoff.com"
+    }
+  ]
+}
