@@ -57,7 +57,7 @@ class Tag implements Compilable
      */
     public function hasContent()
     {
-        return ! is_null( $this->content );
+        return $this->content instanceof Compilable;
     }
 
     /**
