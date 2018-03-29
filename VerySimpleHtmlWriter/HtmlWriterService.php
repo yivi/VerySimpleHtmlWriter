@@ -8,9 +8,9 @@ class HtmlWriterService
     /**
      * @param string $tag
      *
-     * @return Compilable
+     * @return Tag
      */
-    public function tag( string $tag ): Compilable
+    public function tag( string $tag ): Tag
     {
 
         return new Tag( $tag, null, null );
@@ -19,15 +19,20 @@ class HtmlWriterService
     /**
      * @param string $tag
      *
-     * @return Compilable
+     * @return Fragment
      */
-    public function fragment( string $tag ): Compilable
+    public function fragment( string $tag ): Fragment
     {
 
         return new Fragment( $tag );
     }
 
-    public function collection( array $compilables )
+    /**
+     * @param array $compilables
+     *
+     * @return CompilableCollection
+     */
+    public function collection( array $compilables ) : CompilableCollection
     {
         return new CompilableCollection( ... $compilables );
     }
