@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Yivoff\\VerySimpleWriter\\": "/"
+      "Yivoff\\VerySimpleHtmlWriter\\": "/"
     }
   }
 }
