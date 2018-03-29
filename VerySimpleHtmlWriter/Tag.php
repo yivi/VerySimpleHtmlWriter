@@ -19,6 +19,12 @@ class Tag implements Compilable
      */
     private $attributes;
 
+    /** @var bool */
+    private $leaveOpen = false;
+
+    /** @var bool */
+    private $justClose = false;
+
     /**
      * Tag constructor.
      *
@@ -121,5 +127,19 @@ class Tag implements Compilable
         }
 
         return implode( ' ', $attributes );
+    }
+
+    public function leaveOpen( bool $bool = true ): Tag
+    {
+        $this->leaveOpen = $bool;
+
+        return $this;
+    }
+
+    public function justClose( bool $bool = true ): Tag
+    {
+        $this->justClose = $bool;
+
+        return $this;
     }
 }
