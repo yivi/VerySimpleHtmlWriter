@@ -92,19 +92,22 @@ class Tag implements Compilable
      */
     public function compile(): string
     {
-        $html       = "<" . $this->tag;
-        $attributes = $this->compileAttributes();
-
-        if ( ! empty( $attributes ) ) {
-            $html .= " $attributes";
+        // If we just want to close an errant tag, let's leave this party as early as possible.
+        if ( $this->justClose ) {
+            return $this->compileCloseTag();
         }
 
-        if ( ! $this->hasContent() ) {
-            $html .= ' />';
-        } elseif ( $this->content instanceof Compilable ) {
-            $html .= '>';
+        // first, we want an open tag, with all its attributes
+        $html = $this->compileOpenTag();
+
+        // if we have content on this tag, let's get that content compiled!
+        if ( $this->hasContent() ) {
             $html .= $this->content->compile();
-            $html .= "</" . $this->tag . '>';
+
+            // if for some reason we do not want the close tag on this baby, it is fine.
+            if ( ! $this->leaveOpen ) {
+                $html .= $this->compileCloseTag();
+            }
         }
 
         return $html;
