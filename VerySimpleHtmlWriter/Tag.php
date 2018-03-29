@@ -52,6 +52,11 @@ class Tag implements Compilable
         return $this;
     }
 
+    public function getContent(): Compilable
+    {
+        return $this->content;
+    }
+
     /**
      * @return bool
      */
