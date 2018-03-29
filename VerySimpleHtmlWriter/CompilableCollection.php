@@ -16,7 +16,7 @@ class CompilableCollection implements Compilable, \IteratorAggregate
     /**
      * CompilableCollection constructor.
      *
-     * @param Compilable[] ...$compilables
+     * @param Compilable ...$compilables
      */
     public function __construct( Compilable ... $compilables )
     {
