@@ -111,6 +111,31 @@ class Tag implements Compilable
 
     }
 
+    private function compileCloseTag(): string
+    {
+        $html = "</" . $this->tag . '>';
+
+        return $html;
+    }
+
+    private function compileOpenTag(): string
+    {
+
+        $html       = "<" . $this->tag;
+        $attributes = $this->compileAttributes();
+
+        if ( ! empty( $attributes ) ) {
+            $html .= " $attributes";
+        }
+
+        if ( $this->hasContent() ) {
+            $html .= ' />';
+        } else {
+            $html .= '>';
+        }
+
+        return $html;
+    }
 
     /**
      * @return string
