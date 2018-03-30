@@ -17,24 +17,24 @@ class HtmlWriterService
     }
 
     /**
-     * @param string $tag
+     * @param string $literal
      *
      * @return Fragment
      */
-    public function fragment( string $tag ): Fragment
+    public function fragment( string $literal ): Fragment
     {
 
-        return new Fragment( $tag );
+        return new Fragment( $literal );
     }
 
     /**
-     * @param array $compilables
+     * @param string $label
      *
-     * @return CompilableCollection
+     * @return Layout
      */
-    public function collection( array $compilables ) : CompilableCollection
+    public function layout( string $label ) : Layout
     {
-        return new CompilableCollection( ... $compilables );
+        return new Layout( $label );
     }
 
 }
