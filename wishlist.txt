@@ -14,3 +14,15 @@ $tag->attribute( 'href', 'https://www.google.com/' )->removeAttribute( 'title' )
 $div = $generator->tag( 'div' )->content( $tag );
 
 echo $tag->compile();
+
+$layout = $generator->layout('main');
+
+$layout->addPart($tag);
+$layout->addPart($anotherTag);
+$layout->addPart($anotherLayout);
+
+$newLayout = $generator->layout('base');
+
+$newLayout->addPart($layout);
+
+echo $layout->compile();
