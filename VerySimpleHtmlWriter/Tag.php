@@ -175,4 +175,71 @@ class Tag implements Compilable
 
         return $this;
     }
+
+
+    // Convienience Methods
+
+    /**
+     * Convenience method to add a "class" to a tag.
+     *
+     * @param string $class
+     *
+     * @return Tag
+     */
+    public function addClass( string $class ): Tag
+    {
+
+        if ( ! isset( $this->attributes['class'] ) ) {
+            $this->attributes['class'] = $class;
+        } else {
+            $this->attributes['class'] .= " $class";
+        }
+
+        return $this;
+    }
+
+    /**
+     * Convenience method to set the "id" of a tag.
+     *
+     * @param string $id
+     *
+     * @return Tag
+     */
+    public function id( string $id ): Tag
+    {
+
+
+        $this->attributes['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Convenience method to set the "value" of an input
+     *
+     * @param string $value
+     *
+     * @return Tag
+     */
+    public function value( string $value ): Tag
+    {
+
+        $this->attributes['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Convenience method to set the "name" of an input.
+     *
+     * @param string $name
+     *
+     * @return Tag
+     */
+    public function name( string $name ): Tag
+    {
+        $this->attributes['name'] = $name;
+
+        return $this;
+    }
 }
