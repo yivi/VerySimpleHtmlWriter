@@ -2,7 +2,7 @@
 
 namespace Yivoff\VerySimpleHtmlWriter;
 
-class HtmlWriterService
+class HtmlWriterService implements WriterInterface
 {
 
     /**
