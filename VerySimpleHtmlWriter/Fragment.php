@@ -18,7 +18,6 @@ class Fragment implements Compilable
      */
     public function __construct( string $content )
     {
-
         $this->content = $content;
     }
 
@@ -27,6 +26,6 @@ class Fragment implements Compilable
      */
     public function compile(): string
     {
-        return $this->content;
+        return htmlspecialchars ($this->content, ENT_COMPAT | ENT_HTML5, 'UTF-8');
     }
 }
