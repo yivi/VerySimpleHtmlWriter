@@ -29,4 +29,11 @@ interface WriterInterface
      * @return Layout
      */
     public function layout( string $label ): Layout;
+
+    /**
+     * @param string $literal
+     *
+     * @return UnescapedFragment
+     */
+    public function unescapedFragment( string $literal ): UnescapedFragment;
 }
