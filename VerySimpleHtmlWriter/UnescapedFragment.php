@@ -1,10 +1,8 @@
 <?php
 
 
-namespace VerySimpleHtmlWriter;
+namespace Yivoff\VerySimpleHtmlWriter;
 
-
-use Yivoff\VerySimpleHtmlWriter\Compilable;
 
 class UnescapedFragment implements Compilable
 {

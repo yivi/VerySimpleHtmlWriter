@@ -27,12 +27,23 @@ class HtmlWriterService implements WriterInterface
         return new Fragment( $literal );
     }
 
+
+    /**
+     * @param string $literal
+     *
+     * @return UnescapedFragment
+     */
+    public function unescapedFragment( string $literal ): UnescapedFragment
+    {
+        return new UnescapedFragment( $literal );
+    }
+
     /**
      * @param string $label
      *
      * @return Layout
      */
-    public function layout( string $label ) : Layout
+    public function layout( string $label ): Layout
     {
         return new Layout( $label );
     }
