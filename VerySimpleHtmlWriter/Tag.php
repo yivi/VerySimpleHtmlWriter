@@ -136,10 +136,12 @@ class Tag implements Compilable
             $html .= " $attributes";
         }
 
+        // if we do have content, then let's carry on.
         if ( $this->hasContent() ) {
-            $html .= ' />';
-        } else {
             $html .= '>';
+        } else {
+            // but if we do not have content, it must be a self-closed tag
+            $html .= ' />';
         }
 
         return $html;
