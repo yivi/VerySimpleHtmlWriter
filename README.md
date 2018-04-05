@@ -12,9 +12,9 @@ $main_layout   = $writer->layout('main');
 
 $openBody      = $writer->tag('body')->leaveOpen();
 $title         = $writer->fragment('hello, world!');
-$h1            = $writer->tag('h1')->content($fragment);
+$h1            = $writer->tag('h1')->content($title);
 
-$main_layout->addParts($openBody, $title, $h1);
+$main_layout->addParts($openBody, $h1);
 
 $ul_nav        = $writer->tag('ul')
                       ->attribute('role', 'navigation')
