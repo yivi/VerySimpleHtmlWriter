@@ -25,8 +25,9 @@ $nav_li_layout = $writer->layout('nav');
 
 $li_home       = $writer->tag('li')->content($writer->fragment('Home'));
 $li_contact    = $writer->tag('li')->content($writer->fragment('Contact'));
+$li_about      = $writer->tag('li')->content($writer->fragment('About'));
 
-$nav_li_layout->addParts($li_home, $li_contact);
+$nav_li_layout->addParts($li_home, $li_contact, $li_about);
 
 $ul_nav->content($nav_li_layout);
 
