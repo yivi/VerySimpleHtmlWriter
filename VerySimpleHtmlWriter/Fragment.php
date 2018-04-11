@@ -22,10 +22,12 @@ class Fragment implements Compilable
     }
 
     /**
+     * @param string $encoding
+     *
      * @return string
      */
-    public function compile(): string
+    public function compile( $encoding = 'UTF-8' ): string
     {
-        return htmlspecialchars ($this->content, ENT_COMPAT | ENT_HTML5, 'UTF-8');
+        return htmlspecialchars( $this->content, ENT_QUOTES | ENT_HTML5, $encoding );
     }
 }

@@ -32,13 +32,15 @@ class Layout implements Compilable, \IteratorAggregate
 
 
     /**
+     * @param string $encoding
+     *
      * @return string
      */
-    public function compile(): string
+    public function compile($encoding = 'UTF-8'): string
     {
         $output = '';
         foreach ( $this->compilables as $compilable ) {
-            $output .= $compilable->compile();
+            $output .= $compilable->compile($encoding);
         }
 
         return $output;

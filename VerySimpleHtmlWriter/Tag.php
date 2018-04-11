@@ -93,9 +93,11 @@ class Tag implements Compilable
     }
 
     /**
+     * @param string $encoding
+     *
      * @return string
      */
-    public function compile(): string
+    public function compile( $encoding = 'UTF-8' ): string
     {
         // If we just want to close an errant tag, let's leave this party as early as possible.
         if ( $this->justClose ) {
@@ -103,11 +105,11 @@ class Tag implements Compilable
         }
 
         // first, we want an open tag, with all its attributes
-        $html = $this->compileOpenTag();
+        $html = $this->compileOpenTag( $encoding );
 
         // if we have content on this tag, let's get that content compiled!
         if ( $this->hasContent() ) {
-            $html .= $this->content->compile();
+            $html .= $this->content->compile( $encoding );
 
             // if for some reason we do not want the close tag on this baby, it is fine.
             if ( ! $this->leaveOpen ) {
@@ -126,11 +128,16 @@ class Tag implements Compilable
         return $html;
     }
 
-    private function compileOpenTag(): string
+    /**
+     * @param string $encoding
+     *
+     * @return string
+     */
+    private function compileOpenTag( $encoding = 'UTF-8' ): string
     {
 
         $html       = "<" . $this->tag;
-        $attributes = $this->compileAttributes();
+        $attributes = $this->compileAttributes( $encoding );
 
         if ( ! empty( $attributes ) ) {
             $html .= " $attributes";
@@ -148,9 +155,11 @@ class Tag implements Compilable
     }
 
     /**
+     * @param string $encoding
+     *
      * @return string
      */
-    private function compileAttributes(): string
+    private function compileAttributes( $encoding = 'UTF-8' ): string
     {
         if ( empty( $this->attributes ) ) {
             return "";
@@ -158,6 +167,8 @@ class Tag implements Compilable
 
         $attributes = [];
         foreach ( $this->attributes as $attribute => $value ) {
+            $attribute    = htmlspecialchars( $attribute, ENT_QUOTES | ENT_HTML5, $encoding );
+            $value        = htmlspecialchars( $value, ENT_QUOTES | ENT_HTML5, $encoding );
             $attributes[] = "$attribute='$value'";
         }
 

@@ -18,7 +18,12 @@ class UnescapedFragment implements Compilable
         $this->content = $content;
     }
 
-    public function compile(): string
+    /**
+     * @param string $encoding (is ignored because it is rendered unescaped)
+     *
+     * @return string
+     */
+    public function compile( $encoding = 'UTF-8' ): string
     {
         return $this->content;
     }
