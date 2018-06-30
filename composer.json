@@ -15,7 +15,11 @@
   },
   "autoload": {
     "psr-4": {
-      "Yivoff\\VerySimpleHtmlWriter\\": "VerySimpleHtmlWriter/"
+      "Yivoff\\VerySimpleHtmlWriter\\": "src/VerySimpleHtmlWriter/"
     }
+  },
+  "require-dev": {
+    "codeception/codeception": "~2.4.0",
+    "codeception/mockery-module": "dev-master"
   }
 }
