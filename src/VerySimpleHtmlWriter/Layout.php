@@ -5,11 +5,11 @@ namespace Yivoff\VerySimpleHtmlWriter;
 
 use Traversable;
 
-class Layout implements Compilable, \IteratorAggregate
+class Layout implements CompilableInterface, \IteratorAggregate
 {
 
     /**
-     * @var Compilable[]
+     * @var CompilableInterface[]
      */
     private $compilables;
     /**
@@ -20,10 +20,10 @@ class Layout implements Compilable, \IteratorAggregate
     /**
      * CompilableCollection constructor.
      *
-     * @param string       $label
-     * @param Compilable[] $compilables
+     * @param string                $label
+     * @param CompilableInterface[] $compilables
      */
-    public function __construct( string $label, Compilable ... $compilables )
+    public function __construct( string $label, CompilableInterface ... $compilables )
     {
 
         $this->label       = $label;
@@ -46,7 +46,7 @@ class Layout implements Compilable, \IteratorAggregate
         return $output;
     }
 
-    public function addParts( Compilable ... $parts ) : Layout
+    public function addParts( CompilableInterface ... $parts ) : Layout
     {
 
         $this->compilables = array_merge($this->compilables, $parts);

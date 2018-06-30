@@ -3,7 +3,7 @@
 namespace Yivoff\VerySimpleHtmlWriter;
 
 
-class Tag implements Compilable
+class Tag implements CompilableInterface
 {
 
     /**
@@ -11,7 +11,7 @@ class Tag implements Compilable
      */
     private $tag;
     /**
-     * @var null|Compilable
+     * @var null|CompilableInterface
      */
     private $content;
     /**
@@ -28,11 +28,11 @@ class Tag implements Compilable
     /**
      * Tag constructor.
      *
-     * @param string          $tag
-     * @param null|Compilable $content
-     * @param array|null      $attributes
+     * @param string                   $tag
+     * @param null|CompilableInterface $content
+     * @param array|null               $attributes
      */
-    public function __construct( string $tag, ?Compilable $content, ?array $attributes )
+    public function __construct( string $tag, ?CompilableInterface $content, ?array $attributes )
     {
 
         $this->tag        = $tag;
@@ -41,18 +41,18 @@ class Tag implements Compilable
     }
 
     /**
-     * @param Compilable $content
+     * @param CompilableInterface $content
      *
      * @return Tag
      */
-    public function content( Compilable $content ): Tag
+    public function content( CompilableInterface $content ): Tag
     {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getContent(): Compilable
+    public function getContent(): CompilableInterface
     {
         return $this->content;
     }
@@ -62,7 +62,7 @@ class Tag implements Compilable
      */
     public function hasContent()
     {
-        return $this->content instanceof Compilable;
+        return $this->content instanceof CompilableInterface;
     }
 
     /**
@@ -119,60 +119,6 @@ class Tag implements Compilable
 
         return $html;
 
-    }
-
-    private function compileCloseTag(): string
-    {
-        $html = "</" . $this->tag . '>';
-
-        return $html;
-    }
-
-    /**
-     * @param string $encoding
-     *
-     * @return string
-     */
-    private function compileOpenTag( $encoding = 'UTF-8' ): string
-    {
-
-        $html       = "<" . $this->tag;
-        $attributes = $this->compileAttributes( $encoding );
-
-        if ( ! empty( $attributes ) ) {
-            $html .= " $attributes";
-        }
-
-        // if we do have content, then let's carry on.
-        if ( $this->hasContent() ) {
-            $html .= '>';
-        } else {
-            // but if we do not have content, it must be a self-closed tag
-            $html .= ' />';
-        }
-
-        return $html;
-    }
-
-    /**
-     * @param string $encoding
-     *
-     * @return string
-     */
-    private function compileAttributes( $encoding = 'UTF-8' ): string
-    {
-        if ( empty( $this->attributes ) ) {
-            return "";
-        }
-
-        $attributes = [];
-        foreach ( $this->attributes as $attribute => $value ) {
-            $attribute    = htmlspecialchars( $attribute, ENT_QUOTES | ENT_HTML5, $encoding );
-            $value        = htmlspecialchars( $value, ENT_QUOTES | ENT_HTML5, $encoding );
-            $attributes[] = "$attribute='$value'";
-        }
-
-        return implode( ' ', $attributes );
     }
 
     public function leaveOpen( bool $bool = true ): Tag
@@ -255,4 +201,60 @@ class Tag implements Compilable
 
         return $this;
     }
+
+    private function compileCloseTag(): string
+    {
+        $html = "</" . $this->tag . '>';
+
+        return $html;
+    }
+
+    /**
+     * @param string $encoding
+     *
+     * @return string
+     */
+    private function compileOpenTag( $encoding = 'UTF-8' ): string
+    {
+
+        $html       = "<" . $this->tag;
+        $attributes = $this->compileAttributes( $encoding );
+
+        if ( ! empty( $attributes ) ) {
+            $html .= " $attributes";
+        }
+
+        // if we do have content, then let's carry on.
+        if ( $this->hasContent() ) {
+            $html .= '>';
+        } else {
+            // but if we do not have content, it must be a self-closed tag
+            $html .= ' />';
+        }
+
+        return $html;
+    }
+
+    /**
+     * @param string $encoding
+     *
+     * @return string
+     */
+    private function compileAttributes( $encoding = 'UTF-8' ): string
+    {
+        if ( empty( $this->attributes ) ) {
+            return "";
+        }
+
+        $attributes = [];
+        foreach ( $this->attributes as $attribute => $value ) {
+            $attribute    = htmlspecialchars( $attribute, ENT_QUOTES | ENT_HTML5, $encoding );
+            $value        = htmlspecialchars( $value, ENT_QUOTES | ENT_HTML5, $encoding );
+            $attributes[] = "$attribute='$value'";
+        }
+
+        return implode( ' ', $attributes );
+    }
+
+
 }

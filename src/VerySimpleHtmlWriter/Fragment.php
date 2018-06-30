@@ -1,10 +1,9 @@
 <?php
 
-
 namespace Yivoff\VerySimpleHtmlWriter;
 
 
-class UnescapedFragment implements Compilable
+class Fragment implements CompilableInterface
 {
 
     /**
@@ -12,19 +11,23 @@ class UnescapedFragment implements Compilable
      */
     private $content;
 
+    /**
+     * Fragment constructor.
+     *
+     * @param string $content
+     */
     public function __construct( string $content )
     {
-
         $this->content = $content;
     }
 
     /**
-     * @param string $encoding (is ignored because it is rendered unescaped)
+     * @param string $encoding
      *
      * @return string
      */
     public function compile( $encoding = 'UTF-8' ): string
     {
-        return $this->content;
+        return htmlspecialchars( $this->content, ENT_QUOTES | ENT_HTML5, $encoding );
     }
 }

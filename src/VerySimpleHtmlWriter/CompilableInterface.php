@@ -3,7 +3,7 @@
 namespace Yivoff\VerySimpleHtmlWriter;
 
 
-interface Compilable
+interface CompilableInterface
 {
 
     /**
