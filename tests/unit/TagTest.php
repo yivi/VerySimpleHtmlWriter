@@ -96,7 +96,8 @@ class TagTest extends \Codeception\MockeryModule\Test
         $this->assertEquals( "</div>", $div->compile() );
     }
 
-    public function testNonsenseShouldOnlyClose() {
+    public function testNonsenseShouldOnlyClose()
+    {
 
         /** @var CompilableInterface $mockCompilable */
         $mockCompilable = \Mockery::mock( CompilableInterface::class )
@@ -108,5 +109,88 @@ class TagTest extends \Codeception\MockeryModule\Test
         $div->leaveOpen()->justClose();
 
         $this->assertEquals( "</div>", $div->compile() );
+    }
+
+    public function testSetName()
+    {
+        $input = new Tag( 'input', null, null );
+
+        $input->name( 'peluso' );
+
+        $this->assertEquals( "<input name='peluso' />", $input->compile() );
+
+    }
+
+    public function testSetId()
+    {
+        $input = new Tag( 'input', null, null );
+
+        $input->id( 'crocodile' );
+
+        $this->assertEquals( "<input id='crocodile' />", $input->compile() );
+
+    }
+
+    public function testSetValue()
+    {
+        $input = new Tag( 'input', null, null );
+
+        $input->value( 'batman' );
+
+        $this->assertEquals( "<input value='batman' />", $input->compile() );
+    }
+
+    public function testSetAttributes()
+    {
+        $input = new Tag( 'input', null, ['type' => 'checkbox'] );
+
+        $input->attribute( 'name', 'uno' );
+        $input->attribute( 'value', '1' );
+
+        $this->assertEquals( "<input type='checkbox' name='uno' value='1' />", $input->compile() );
+    }
+
+    public function testRemoveAttributes()
+    {
+        $input = new Tag( 'input', null, ['type' => 'checkbox'] );
+
+        $input->attribute( 'name', 'uno' );
+        $input->attribute( 'value', '1' );
+        $input->removeAttribute('type');
+
+        $this->assertEquals( "<input name='uno' value='1' />", $input->compile() );
+    }
+
+    public function testAddSingleClass(  )
+    {
+        $input = new Tag( 'input', null, ['type' => 'checkbox'] );
+
+        $input->addClass('hello');
+
+        $this->assertEquals( "<input type='checkbox' class='hello' />", $input->compile() );
+    }
+
+    public function testAddMultipleClasses(  )
+    {
+        $input = new Tag( 'input', null, null);
+
+        $input->addClass('hello');
+        $input->addClass('world');
+
+        $this->assertEquals( "<input class='hello world' />", $input->compile() );
+    }
+
+    public function testSetContent() {
+        /** @var CompilableInterface $mockCompilable */
+        $mockCompilable = \Mockery::mock( CompilableInterface::class )
+                                  ->shouldReceive( ['compile' => 'foo bar!'] )
+                                  ->getMock();
+
+        $span = new Tag('span', null, null);
+
+        $span->content($mockCompilable);
+
+        $this->assertEquals("<span>foo bar!</span>", $span->compile());
+
     }
 }
